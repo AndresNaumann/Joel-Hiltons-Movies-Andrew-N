@@ -4,6 +4,8 @@ namespace Joel_Hiltons_Movies.Models
 {
     public class Application
     {
+        // This model defines what type of data is going into the database
+
         [Key]
         [Required]
         public int MovieID { get; set; }

@@ -10,6 +10,7 @@
 <!--Form for the user to enter a new movie-->
 <form method="post">
     <label asp-for="category">Category:</label><br />
+    <!--Dropdown for category-->
     <select asp-for="category" name="category">
         <option value="Miscellaneous">Miscellaneous</option>
         <option value="Drama">Drama</option>
@@ -30,6 +31,7 @@
     <label asp-for="director">Director:</label><br>
     <input type="text" asp-for="director" name="director" required><br><br>
 
+    <!--dropdown for rating-->
     <label asp-for="rating">Rating:</label><br>
     <select asp-for="rating" name="rating">
         <option value="G">G</option>

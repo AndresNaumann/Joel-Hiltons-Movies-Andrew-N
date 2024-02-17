@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+// DBContext page
+
 namespace Joel_Hiltons_Movies.Models
 {
     public class ApplicationContext : DbContext
