@@ -6,13 +6,11 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<p>This is where the form is</p>
-
 <p>Enter in a new movie</p>
+<!--Form for the user to enter a new movie-->
 <form method="post">
     <label asp-for="category">Category:</label><br />
     <select asp-for="category" name="category">
-        <option value="Category">Category</option>
         <option value="Miscellaneous">Miscellaneous</option>
         <option value="Drama">Drama</option>
         <option value="Television">Television</option>
