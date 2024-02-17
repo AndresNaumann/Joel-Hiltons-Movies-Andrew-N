@@ -1,7 +1,12 @@
-﻿namespace Joel_Hiltons_Movies.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Joel_Hiltons_Movies.Models
 {
     public class Application
     {
+        [Key]
+        [Required]
+        public int MovieID { get; set; }
         public string category { get; set; }
         public string title { get; set; }
         public int year { get; set; }
