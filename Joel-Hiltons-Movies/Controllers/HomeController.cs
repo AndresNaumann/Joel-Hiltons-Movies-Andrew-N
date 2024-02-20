@@ -14,7 +14,7 @@ namespace Joel_Hiltons_Movies.Controllers
         }
         public IActionResult Index() // be able to go to the home page
         {
-            return View();
+            return View(); 
         }
 
         public IActionResult AboutJoel() // Joel's about page
