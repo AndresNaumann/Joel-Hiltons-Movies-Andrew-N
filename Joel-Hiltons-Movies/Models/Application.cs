@@ -9,17 +9,19 @@ namespace Joel_Hiltons_Movies.Models
 
         [Key]
         [Required]
-        public int MovieID { get; set; }
+        public int MovieId { get; set; }
 
         [ForeignKey("CategoryID")]
-        public int CategoryID { get; set; }
-        public Category category { get; set; }
-        public string title { get; set; }
-        public int year { get; set; }
-        public string director { get; set; }
-        public string rating { get; set; }
-        public bool? edited { get; set; }
+        public int? CategoryID { get; set; }
+        public Category Category { get; set; }
+        public string Title { get; set; }
+        [Range(1888, 2025,ErrorMessage = "You must enter a valid year.")]
+        public int Year { get; set; }
+        public string? Director { get; set; }
+        public string? Rating { get; set; }
+        public bool Edited { get; set; }
         public string? lent_to { get; set; }
+        public bool CopiedToPlex { get; set; }
         public string? notes { get; set; }
     }
 }

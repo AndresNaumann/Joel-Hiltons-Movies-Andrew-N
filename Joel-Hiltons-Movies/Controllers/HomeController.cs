@@ -32,15 +32,25 @@ namespace Joel_Hiltons_Movies.Controllers
         [HttpPost]
         public IActionResult Movies(Application response)
         {
-            _context.JoelsMovies.Add(response); // Add the record to the database
-            _context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _context.Movies.Add(response); // Add the record to the database
+                _context.SaveChanges();
 
-            return View("Confirmation", response);
+                return View("Confirmation", response);
+            }
+            else // Invalid Data
+            {
+                ViewBag.Categories = _context.Categories.ToList();
+
+                return View(response);
+            }
+        
         }
 
         public IActionResult MovieList()
         {
-            var movies = _context.JoelsMovies.ToList();
+            var movies = _context.Movies.ToList();
 
             return View(movies);
         }
@@ -48,8 +58,8 @@ namespace Joel_Hiltons_Movies.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var recordToEdit = _context.JoelsMovies
-                .Single(x => x.MovieID == id);
+            var recordToEdit = _context.Movies
+                .Single(x => x.MovieId == id);
 
             ViewBag.Categories = _context.Categories.ToList();
 
@@ -63,6 +73,25 @@ namespace Joel_Hiltons_Movies.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("MovieList");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Movies.Single(x => x.MovieId == id);
+
+            return View(recordToDelete);
+
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Application deleted)
+        {
+            _context.Movies.Remove(deleted);
+            _context.SaveChanges();
+
+            return RedirectToAction("MovieList");
+
         }
     }
 }

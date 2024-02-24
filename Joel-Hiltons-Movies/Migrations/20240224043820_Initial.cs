@@ -2,8 +2,6 @@
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace Joel_Hiltons_Movies.Migrations
 {
     /// <inheritdoc />
@@ -26,49 +24,35 @@ namespace Joel_Hiltons_Movies.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "JoelsMovies",
+                name: "Movies",
                 columns: table => new
                 {
-                    MovieID = table.Column<int>(type: "INTEGER", nullable: false)
+                    MovieId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CategoryID = table.Column<int>(type: "INTEGER", nullable: false),
-                    title = table.Column<string>(type: "TEXT", nullable: false),
-                    year = table.Column<int>(type: "INTEGER", nullable: false),
-                    director = table.Column<string>(type: "TEXT", nullable: false),
-                    rating = table.Column<string>(type: "TEXT", nullable: false),
-                    edited = table.Column<bool>(type: "INTEGER", nullable: true),
+                    CategoryID = table.Column<int>(type: "INTEGER", nullable: true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Year = table.Column<int>(type: "INTEGER", nullable: false),
+                    Director = table.Column<string>(type: "TEXT", nullable: true),
+                    Rating = table.Column<string>(type: "TEXT", nullable: true),
+                    Edited = table.Column<bool>(type: "INTEGER", nullable: false),
                     lent_to = table.Column<string>(type: "TEXT", nullable: true),
+                    CopiedToPlex = table.Column<bool>(type: "INTEGER", nullable: false),
                     notes = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JoelsMovies", x => x.MovieID);
+                    table.PrimaryKey("PK_Movies", x => x.MovieId);
                     table.ForeignKey(
-                        name: "FK_JoelsMovies_Categories_CategoryID",
+                        name: "FK_Movies_Categories_CategoryID",
                         column: x => x.CategoryID,
                         principalTable: "Categories",
                         principalColumn: "CategoryID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "CategoryID", "CategoryName" },
-                values: new object[,]
-                {
-                    { 1, "Miscellaneous" },
-                    { 2, "Drama" },
-                    { 3, "Television" },
-                    { 4, "Horror/Suspense" },
-                    { 5, "Comedy" },
-                    { 6, "Family" },
-                    { 7, "Action/Adventure" },
-                    { 8, "VHS" }
-                });
-
             migrationBuilder.CreateIndex(
-                name: "IX_JoelsMovies_CategoryID",
-                table: "JoelsMovies",
+                name: "IX_Movies_CategoryID",
+                table: "Movies",
                 column: "CategoryID");
         }
 
@@ -76,7 +60,7 @@ namespace Joel_Hiltons_Movies.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "JoelsMovies");
+                name: "Movies");
 
             migrationBuilder.DropTable(
                 name: "Categories");
