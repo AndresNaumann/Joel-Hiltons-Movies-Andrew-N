@@ -25,6 +25,7 @@ namespace Joel_Hiltons_Movies.Controllers
         [HttpGet]
         public IActionResult Movies() // Form for adding movies page
         {
+            ViewBag.Categories = _context.Categories.ToList();
             return View("Movies");
         }
 
@@ -36,6 +37,32 @@ namespace Joel_Hiltons_Movies.Controllers
 
             return View("Confirmation", response);
         }
-       
+
+        public IActionResult MovieList()
+        {
+            var movies = _context.JoelsMovies.ToList();
+
+            return View(movies);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _context.JoelsMovies
+                .Single(x => x.MovieID == id);
+
+            ViewBag.Categories = _context.Categories.ToList();
+
+            return View("Movies", recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Application updated)
+        {
+            _context.Update(updated);
+            _context.SaveChanges();
+
+            return RedirectToAction("MovieList");
+        }
     }
 }
