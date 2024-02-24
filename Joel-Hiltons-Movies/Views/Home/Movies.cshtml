@@ -14,11 +14,11 @@
 
     <label asp-for="Category">Category:</label><br />
     <!--Dropdown for category-->
-    <select asp-for="CategoryID" name="Category">
+    <select asp-for="CategoryId">
         <option value="">Select Category</option>
         @foreach (Category c in ViewBag.Categories)
         {
-            <option value="@c.CategoryID">@c.CategoryName</option>
+            <option value="@c.CategoryId">@c.CategoryName</option>
         }
     </select><br><br>
 
@@ -41,7 +41,7 @@
     </select><br><br>
 
     <label asp-for="Edited">Edited</label><br />
-    <select asp-for="Edited" name="Edited" required>
+    <select asp-for="Edited" required>
         <option value="true">Yes</option>
         <option value="false">No</option>
     </select><br><br>

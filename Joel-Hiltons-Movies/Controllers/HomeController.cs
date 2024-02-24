@@ -22,12 +22,16 @@ namespace Joel_Hiltons_Movies.Controllers
             return View(); 
         }
 
+        // Create a movie to put into the list
+
         [HttpGet]
         public IActionResult Movies() // Form for adding movies page
         {
             ViewBag.Categories = _context.Categories.ToList();
-            return View("Movies");
+            return View("Movies", new Application());
         }
+
+        // Only let in valid data into the database
 
         [HttpPost]
         public IActionResult Movies(Application response)
@@ -48,6 +52,8 @@ namespace Joel_Hiltons_Movies.Controllers
         
         }
 
+        // List of Joel's movies
+
         public IActionResult MovieList()
         {
             var movies = _context.Movies.ToList();
@@ -55,7 +61,7 @@ namespace Joel_Hiltons_Movies.Controllers
             return View(movies);
         }
 
-        [HttpGet]
+        [HttpGet] // Edit a record
         public IActionResult Edit(int id)
         {
             var recordToEdit = _context.Movies
@@ -66,7 +72,7 @@ namespace Joel_Hiltons_Movies.Controllers
             return View("Movies", recordToEdit);
         }
 
-        [HttpPost]
+        [HttpPost] // Post the edits to the database
         public IActionResult Edit(Application updated)
         {
             _context.Update(updated);
@@ -75,7 +81,7 @@ namespace Joel_Hiltons_Movies.Controllers
             return RedirectToAction("MovieList");
         }
 
-        [HttpGet]
+        [HttpGet] // Delete a record from the database
         public IActionResult Delete(int id)
         {
             var recordToDelete = _context.Movies.Single(x => x.MovieId == id);
@@ -84,14 +90,13 @@ namespace Joel_Hiltons_Movies.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost] // Post it to the database
         public IActionResult Delete(Application deleted)
         {
             _context.Movies.Remove(deleted);
             _context.SaveChanges();
 
             return RedirectToAction("MovieList");
-
         }
     }
 }
